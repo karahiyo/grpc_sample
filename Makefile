@@ -29,8 +29,11 @@ protoc-gen:
 save:
 	gom gen gomfile
 
-run:
-	go run main.go test.pb.go
+server:
+	gom run server/main.go
+
+client:
+	gom run client/main.go
 
 test:
 	gom test -v
@@ -38,4 +41,5 @@ test:
 fmt:
 	gofmt -w *.go
 
+.PHONY: server client
 
