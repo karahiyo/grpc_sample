@@ -1,7 +1,7 @@
 CWD=$(shell pwd)
 GOROOT:=
 GOPATH:=$(shell pwd)
-PATH=$(CWD)/bin
+PATH+=$(CWD)/bin
 
 env:
 	echo $(GOPATH)
@@ -15,19 +15,19 @@ __install-protobuf:
 		--prefix=$(CWD) \
 		&& make && make check && make install && popd
 
-setup:
+__setup:
 	@go get -u -v github.com/golang/protobuf/proto
 	@go get -u -v github.com/golang/protobuf/protoc-gen-go
 
-save:
-	gom gen gomfile
-
-install:
+install: __setup
 	go get github.com/mattn/gom
 	gom install
 
 protoc-gen:
 	protoc --go_out=. *.proto
+
+save:
+	gom gen gomfile
 
 run:
 	go run main.go test.pb.go

@@ -4,3 +4,4 @@ _vendor
 /bin/
 /pkg/
 /lib/
+/src/github.com
