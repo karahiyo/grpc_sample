@@ -1,0 +1,6 @@
+.*
+!.git*
+_vendor
+/bin/
+/pkg/
+/lib/
