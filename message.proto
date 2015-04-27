@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package proro;
+
+service MessagingService {
+    rpc ListMessages(RequestType) returns (stream Message) {};
+    rpc SendMessage(Message) returns (ResponseType) {};
+}
+
+message ResponseType {}
+
+message RequestType {}
+
+message Message {
+    string ts = 1;
+    string msg = 2;
+}
+

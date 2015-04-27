@@ -3,11 +3,32 @@ package main
 import (
 	"log"
 	"net"
+	"sync"
 
-	pb "github.com/grpc/grpc-common/go/helloworld"
+	pb "message"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
+
+type messagingService struct {
+	messages []*pb.Message
+	m sync.Mutex
+}
+
+func (ms *messagingService) ListMessages(p *pb.RequestType, stream pb.MessageService_ListMessageServer) error {
+	ms.m.Lock()
+	defer ms.m.UnLock()
+	for _, p := range ms.messages {
+		if err := stream.Send(p); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (ms *messagingService) SendMessage(c context.Context, p *pb.Person) (*pb.ResponseType, error) {
+
+}
 
 const (
 	port = ":50051"
