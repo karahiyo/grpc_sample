@@ -1,7 +1,7 @@
 CWD=$(shell pwd)
 GOROOT:=
 GOPATH:=$(shell pwd)
-PATH=$PATH:$(CWD)/bin
+PATH=$(PATH):$(CWD)/bin
 
 env:
 	echo $(GOPATH)
